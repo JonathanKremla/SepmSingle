@@ -1,0 +1,18 @@
+STUNDENLISTE
+Jonathan Kremla 11922635
+[7.10] 0.50h Template durchlesen + intitial Commit
+[10.10] 4h - [US1]
+[11.10] 5h - [US2] & [US3]
+[12.10] 1h - [US3]
+[13.10] 5h - [US4]
+[14.10] 6h - [US4] & [US5] & [US6]
+[15.10] 8h - [US4] & [US6] & [US7] & [US8]
+[16.10] 5h - [TS] & [US6]
+[18.10] 8h - [TS]
+[19.10] 3h - [TS]
+[22.10] 3h - [US9]
+[24.10] 5h - [US9]
+[25.10] 6h - [TS]
+[26.10] 6h - [TS]
+SUM = 65.5h
+

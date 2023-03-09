@@ -1,0 +1,62 @@
+<div class="mt-3">
+  <table class="table border-bottom border-start">
+    <tbody *ngIf="horseTree">
+    <tr class="center-tr">
+      <div class="float-start">
+        <td>
+          <a (click)="collapse()"
+             aria-label="Collapse"
+             class="btn btn-sm responsive-info-button">
+            <i *ngIf="!collapsed" class="bi bi-caret-down"></i>
+            <i *ngIf="collapsed" class="bi-caret-right"></i>
+          </a>
+        </td>
+      </div>
+      <td>
+        <p class="text-break">
+          {{horseTree.name}}
+        </p>
+      </td>
+      <div class="float-end">
+        <td>
+          <p>
+            {{horseTree.dateOfBirth}}
+          </p>
+        </td>
+        <td>
+          <div class="btn-group">
+            <a [routerLink]="['/horses/detail', horseTree.id]"
+               aria-label="Show horse details"
+               class="btn btn-sm responsive-info-button">
+              <i class="bi bi-info-lg"></i>
+            </a>
+            <a [routerLink]="['/horses/edit', horseTree.id]"
+               aria-label="Edit horse"
+               class="btn btn-sm responsive-warning-button">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <a (click)="deleteHorse()"
+               aria-label="Delete horse"
+               class="btn btn-sm responsive-danger-button">
+              <i class="bi bi-trash"></i>
+            </a>
+          </div>
+        </td>
+      </div>
+    </tr>
+    </tbody>
+  </table>
+  <div style="margin-left: 30px">
+    <app-family-tree-node
+      *ngIf="horseTree.mother && !collapsed"
+      [horse]="horseTree.mother"
+      (loadTreeAfterDeletion)="this.passDeletion($event)">
+
+    </app-family-tree-node>
+    <app-family-tree-node
+      *ngIf="horseTree.father && !collapsed"
+      [horse]="horseTree.father"
+      (loadTreeAfterDeletion)="this.passDeletion($event)">
+    </app-family-tree-node>
+  </div>
+</div>

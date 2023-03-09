@@ -1,0 +1,133 @@
+<h1 class="display-1">Details of Horse</h1>
+
+<form>
+  <div class="row">
+    <!-- Start name and date of birth row -->
+    <div class="mb-2 col-lg-6">
+      <!-- When nesting rows, always make row > col-* > row. The Bootstrap classes do not work right when an element is both col* and row -->
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Name
+        </label>
+        <div class="col-form-label col-md-2 col-lg-4">
+          <p class="text-break">
+            {{horse.name}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Date of Birth
+        </label>
+        <div class="col-form-label col-md-2 col-lg-4">
+          {{horse.dateOfBirth}}
+        </div>
+      </div>
+    </div>
+    <!-- End name and date of birth row -->
+  </div>
+
+
+  <div class="row">
+    <!-- Start name and date of birth row -->
+    <div class="mb-2 col-lg-6">
+      <!-- When nesting rows, always make row > col-* > row. The Bootstrap classes do not work right when an element is both col* and row -->
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Sex
+        </label>
+        <div class="col-form-label col-md-2 col-lg-4">
+          {{horse.sex}}
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Owner
+        </label>
+        <div class="col-form-label col-md-10 col-lg-8">
+          <p class="text-break">
+            {{getOwnerName()}}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- End name and date of birth row -->
+  </div>
+
+
+  <div class="row">
+    <!-- Start name and date of birth row -->
+    <div class="mb-2 col-lg-6">
+      <!-- When nesting rows, always make row > col-* > row. The Bootstrap classes do not work right when an element is both col* and row -->
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Mother
+        </label>
+        <div class="col-form-label col-md-2 col-lg-4">
+          <p class="text-break">
+            {{getMotherName()}}
+          </p>
+          <a [hidden]="!getMotherId()"
+             [routerLink]="['../', getMotherId()]"
+             aria-label="Show horse details"
+             class="btn btn-outline-info">
+            <i class="bi bi-info"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4">
+          Father
+        </label>
+        <div class="col-form-label col-md-10 col-lg-8">
+          <p class="text-break">
+            {{getFatherName()}}
+          </p>
+          <a [hidden]="!getFatherId()"
+             [routerLink]="['../', getFatherId()]"
+             aria-label="Show horse details"
+             class="btn btn-outline-info">
+            <i class="bi bi-info-lg"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- End name and date of birth row -->
+  </div>
+
+
+  <div class="row">
+    <!-- No row and col-* here. We want this to always span the whole width. -->
+    <label class="col-form-label text-md-end text-md-end text-muted col-md-2">
+      Description
+    </label>
+    <div class="col-form-label col-md-10">
+      <p class="text-break">
+        {{horse.description}}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex flex-row">
+    <button (click)=deleteHorse()
+            class="btn btn-danger"
+            type="button"
+    >
+      <i class="bi bi-trash"></i>
+      Delete
+    </button>
+    <button [routerLink]="['/horses/edit', horse.id]"
+            class="btn btn-warning"
+            type="button"
+    >
+      <i class="bi bi-pen"></i>
+      edit
+    </button>
+  </div>
+</form>

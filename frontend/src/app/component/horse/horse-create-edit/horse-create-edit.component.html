@@ -1,0 +1,179 @@
+<h1 class="display-1">{{heading}}</h1>
+
+
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <div class="row">
+    <!-- Start name and date of birth row -->
+    <div class="mb-2 col-lg-6">
+      <!-- When nesting rows, always make row > col-* > row. The Bootstrap classes do not work right when an element is both col* and row -->
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4" for="horseName">
+          Name
+        </label>
+        <div class="col-md-10 col-lg-8"
+        >
+          <input #horseNameModel="ngModel"
+                 [(ngModel)]="horse.name"
+                 [class]="dynamicCssClassesForInput(horseNameModel)"
+                 class="form-control"
+                 id="horseName"
+                 name="horseName"
+                 placeholder="Horse name"
+                 required
+                 type="text"
+          >
+          <div class="invalid-feedback">
+            <!-- This is shown, when the form validation deems the name input to be invalid -->
+            Name is required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4" for="horseDateOfBirth">
+          Date of Birth
+        </label>
+        <div class="col-md-10 col-lg-8"
+        >
+          <div class="input-group">
+            <input #horseDateOfBirthModel="ngModel"
+                   [(ngModel)]="horse.dateOfBirth"
+                   [class]=dynamicCssClassesForInput(horseDateOfBirthModel)
+                   [value]="horse.dateOfBirth"
+                   class="form-control"
+                   id="horseDateOfBirth"
+                   name="horseDateOfBirth"
+                   placeholder="yyyy-mm-dd"
+                   required
+                   type="date"
+            >
+            <div class="invalid-feedback">
+              Date of birth is required
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End name and date of birth row -->
+  </div>
+
+  <div class="row">
+    <!-- Start sex and owner row -->
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4" for="horseSex">
+          Sex
+        </label>
+        <div class="col-md-10 col-lg-8"
+        >
+          <select [(ngModel)]="horse.sex"
+                  class="form-select"
+                  id="horseSex"
+                  name="horseSex"
+                  required
+          >
+            <option value="FEMALE">Female</option>
+            <option value="MALE">Male</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4" for="horseOwner">
+          Owner
+        </label>
+        <app-autocomplete
+          [(ngModel)]="horse.owner"
+          [formatModel]="formatOwnerName"
+          [suggestions]="ownerSuggestions"
+          class="col-md-10 col-lg-8"
+          id="horseOwner"
+          name="horseOwner"
+          textInputClass="form-control"
+          valueNeedsToMatchSuggestion="true"
+        ></app-autocomplete>
+      </div>
+    </div>
+    <!-- End sex and owner row -->
+  </div>
+
+
+  <div class="row">
+    <!-- Start parents row -->
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4" for="horseMother">
+          mother
+        </label>
+        <app-autocomplete
+          [(ngModel)]="horse.mother"
+          [formatModel]="formatMotherName"
+          [suggestions]="motherSuggestions"
+          class="col-md-10 col-lg-8"
+          id="horseMother"
+          name="horseMother"
+          textInputClass="form-control"
+          valueNeedsToMatchSuggestion="true"
+        ></app-autocomplete>
+      </div>
+    </div>
+
+    <div class="mb-2 col-lg-6">
+      <div class="row">
+        <label class="col-form-label text-md-end text-muted col-md-2 col-lg-4" for="horseFather">
+          father
+        </label>
+        <app-autocomplete
+          [(ngModel)]="horse.father"
+          [formatModel]="formatFatherName"
+          [suggestions]="fatherSuggestions"
+          class="col-md-10 col-lg-8"
+          id="horseFather"
+          name="horseFather"
+          textInputClass="form-control"
+          valueNeedsToMatchSuggestion="true"
+        ></app-autocomplete>
+      </div>
+    </div>
+    <!-- End parents row -->
+  </div>
+
+
+  <div class="row">
+    <!-- No row and col-* here. We want this to always span the whole width. -->
+    <label class="col-form-label text-md-end text-md-end text-muted col-md-2" for="horseDescription">
+      Description
+    </label>
+    <div class="col-md-10"
+    >
+      <textarea [(ngModel)]="horse.description"
+                class="form-control"
+                id="horseDescription"
+                name="horseDescription"
+      >
+      </textarea>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex flex-row">
+    <button (click)=deleteHorse()
+            *ngIf="!modeIsCreate"
+            class="btn btn-danger"
+            type="button"
+    >
+      <i class="bi bi-trash"></i>
+      Delete
+    </button>
+    <span class="flex-grow-1"></span>
+    <button [disabled]="!form.valid"
+            class="btn btn-primary"
+            type="submit"
+            type="submit"
+    >
+      {{submitButtonText}}
+    </button>
+  </div>
+</form>

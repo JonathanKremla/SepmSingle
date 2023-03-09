@@ -1,0 +1,28 @@
+<h1 class="display-1">Family Tree</h1>
+
+<div class="mb-2 col-lg-6">
+  <div class="row">
+    <div class="col-xl-3">
+      <button (click)="loadTree()" class="btn btn-primary mr-1 mb-1">
+        <i class="bi bi-arrow-clockwise"></i>
+        Load
+      </button>
+    </div>
+    <div class="col-xl-7">
+      <input [(ngModel)]="generations"
+             class="form-control col-xl-2"
+             id="generations"
+             name="generations"
+             placeholder="Generations"
+             type="number">
+    </div>
+  </div>
+</div>
+
+<app-family-tree-node
+  (loadTreeAfterDeletion)="loadTreeAfterDeletion($event)"
+  *ngIf="horseTree && horseTree.dateOfBirth"
+  [horse]="this.horseTree"
+  [isRoot]="true">
+
+</app-family-tree-node>

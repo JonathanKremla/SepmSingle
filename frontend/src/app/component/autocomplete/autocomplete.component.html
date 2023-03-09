@@ -1,0 +1,11 @@
+<input (blur)="resetInputText()"
+       (ngModelChange)="inputChange.next($event)"
+       [(ngModel)]="inputText"
+       [attr.list]="dataListId"
+       [disabled]="disabled"
+       [ngClass]="textInputClass"
+       type="text"
+>
+<datalist [id]="dataListId" [ngClass]="datalistClass">
+  <option *ngFor="let candidateEntry of valueCandidates | keyvalue" [value]="formatModel(candidateEntry.value)">
+</datalist>
